@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.ArrayList;
 public class ArrayList {
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -55,7 +56,7 @@ public class ArrayList {
                     ordenarLista(listaElementos);
                     break;
                 case 8:
-                    System.out.println("Salindo del programa")
+                    System.out.println("Salindo del programa");
                     break;
                 default:
                     System.out.println("Opcion no valida, Intentalo de nuevo por favor.");
@@ -63,29 +64,29 @@ public class ArrayList {
             }
 
         }while (opcion =! 8);
-
+    sc.close();
     }
         //metodos de opciones
         public static void mostrarlista(ArrayList<String> lista) {
-            System.out.println("Lista de elementos");
+            System.out.println("\nLista de elementos");
             for (int i = 0; lista.size(); i++){
                 System.out.println(i + " "+lista.get(i));
             }
         }
-        public static void agregarElemento(ArrayList<String>, lista, String elemento){
-        lista.add(elemnto);
+        public static void agregarElemento(ArrayList<String> lista, String elemento){
+        lista.add(elemento);
         }
-        public static void buscarElemento(ArrayList<String> lista, string elemento){
+        public static void buscarElemento(ArrayList<String> lista, String elemento){
             ArrayList<Integer> posiciones = new ArrayList<>();
             for(int i =0; i < lista.size(); i++){
                 if(lista.get(i).equals(elemento).toLowerCase()){
                     posiciones.add(i);
                 }
             }
-            if!posiciones.isEmpty(){
-                System.out.println("El elemnto "+ elemento "se encuentra en las posciones: " + posiciones);
+            if(!posiciones.isEmpty()){
+                System.out.println("El elemnto "+ elementonto + "se encuentra en las posciones: " + posiciones);
             }else{
-                System.out.println("El elemnto "+ elemento" no se encuntra en ninguna de las posiciones ");
+                System.out.println("El elemnto "+ elemento + " no se encuntra en ninguna de las posiciones ");
             }
         }
         public static void eliminarElemento (ArrayList<String> lista) {
@@ -97,18 +98,18 @@ public class ArrayList {
                 int eliminar = sc.nextInt();
                 lista.remove(index = eliminar);
                 System.out.println("EL elemento ha sido eliminado");
-            } else {
-                System.out.println("La palabra introducida no es valida");
-            }
-            //duda de poner switch para mas eficaz!!!!
-            else if (opcionEliminar == 2){
+            }else{
+                    System.out.println("La palabra introducida no es valida");
+                }
+                //duda de poner switch para mas eficaz!!!!
+                if (opcionEliminar == 2){
                 System.out.println("Introduce el indice de la palabra que desea eliminar");
                 int indice = sc.nextInt();
-                if (indice => 0 && indice <= lista.size()){
+                if (indice >= 0 && indice <= lista.size()){
                     lista.remove(indice);
                     System.out.println("El elemento ha sido eliminado");
                 } else {
-                    System.out.prontln("En indice no es valido");
+                    System.out.println("En indice no es valido");
                 }
             }
         }
@@ -126,15 +127,14 @@ public class ArrayList {
                     Collections.replaceAll(lista, palabra, palabraNueva);
                     System.out.println("La palabara ha sido modificada exitosamente");
                 } else {
-                    System.out.println("La palabra introducida no se encuntra dentro de la lista ")
-                } else {
-                    System.out.println("La palabra que ha introducido no es valida");
+                    System.out.println("La palabra introducida no se encuntra dentro de la lista ");
                 }
+
             } else if (opcionModificar == 2) {
                 System.out.println("Introduzca el indice del elemento que desea modificar");
                 int modificarIndice = sc.nextInt();
                 int indice = 0;
-                if (indice =>0 && indice <= lista.size()){
+                if (indice >= 0 && indice <= lista.size()){
                     System.out.println("Introduce la nueva palabra que desea añadir");
                     String palabraNueva = sc.nextLine();
                     lista.set(modificarIndice, palabraNueva);
@@ -151,9 +151,11 @@ public class ArrayList {
         public static void ordenarLista (ArrayList<String> lista){
         Collections.sort(lista);
         mostrarlista(lista);
-        }
+
 
     }
-    sc.close();
-}
+
+    }
+
+
 
