@@ -41,5 +41,11 @@ public class ArrayList {
                     lista.remove(index =eliminar);
         }
 
+        public static void modificarElemento(ArrayList<String> lista){
+            System.out.println("Introduzca la palabra que desea modificar")
+                    String palabra =sc.nextLine().toLowerCase();
+
+
+        }
         }
 }
