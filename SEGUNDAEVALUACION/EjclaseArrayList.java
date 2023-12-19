@@ -1,14 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
-import java.util.ArrayList;
-public class ArrayList {
+
+public class EjclaseArrayList {
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Striing> listaElementos = new ArrayList<>();
+        ArrayList<String> listaElementos = new ArrayList<>();
 
         //Entrada de elementos por el usuario
-        System.out.println("Por favor escriba elementos en la fila(Escriba 'fin' si desea terminar");
-        String elemento = sc.nexLine();
+        System.out.println("Por favor escriba elementos en la filaEscriba ('fin') si desea terminar");
+        String elemento = sc.nextLine();
         while (!elemento.equalsIgnoreCase("fin")) {
             listaElementos.add(elemento);
             elemento = sc.nextLine();
@@ -16,10 +17,10 @@ public class ArrayList {
         // Menu de operaciones
         int opcion;
         do {
-            System.out.println("\nMenú de Operaciones:");
+            System.out.println("\nMenu de Operaciones:");
             System.out.println("1. Mostrar la lista");
             System.out.println("2. Agregar un elemento nuevo al ArrayList");
-            System.out.println("3. Buscar un elemento y mostrar la posición (o posiciones) en la que se encuentra");
+            System.out.println("3. Buscar un elemento y mostrar la posicion (o posiciones) en la que se encuentra");
             System.out.println("4. Eliminar un elemento");
             System.out.println("5. Modificar un elemento");
             System.out.println("6. Limpiar la lista");
@@ -36,21 +37,22 @@ public class ArrayList {
                 case 2:
                     System.out.println("Introduzca un nuevo elemento");
                     elemento = sc.nextLine();
-                    agregarElemento(listaElementos, elemento);
+                    agregarElemento(listaElementos, sc);
                     System.out.println("El elemento ha sido añadido");
                     break;
                 case 3:
                     System.out.println("Introduzca el elemento que desea buscar");
                     elemento = sc.nextLine();
-                    buscarElemento(listaElementos, elemento);
+                    buscarElemento(listaElementos, sc);
                 case 4:
-                    eliminarElemento(listaElementos);
+                    eliminarElemento(listaElementos, sc);
                     break;
                 case 5:
-                    modificarElemento();
+                    modificarElemento(listaElementos, sc);
                     break;
                 case 6:
                     limpiarLista(listaElementos);
+                    System.out.println("La lista ha sido limpiada");
                     break;
                 case 7:
                     ordenarLista(listaElementos);
@@ -63,44 +65,51 @@ public class ArrayList {
                     break;
             }
 
-        }while (opcion =! 8);
+        }while (opcion != 8);
     sc.close();
     }
         //metodos de opciones
         public static void mostrarlista(ArrayList<String> lista) {
             System.out.println("\nLista de elementos");
-            for (int i = 0; lista.size(); i++){
+            for (int i = 0; i < lista.size(); i++){
                 System.out.println(i + " "+lista.get(i));
             }
         }
-        public static void agregarElemento(ArrayList<String> lista, String elemento){
+        public static void agregarElemento(ArrayList<String> lista, Scanner sc){
+        String elemento = sc.nextLine().toLowerCase();
         lista.add(elemento);
         }
-        public static void buscarElemento(ArrayList<String> lista, String elemento){
+        public static void buscarElemento(ArrayList<String> lista, Scanner sc){
+            mostrarlista(lista);
+
+            System.out.println("");
+            String elemento = sc.nextLine().toLowerCase();
+
             ArrayList<Integer> posiciones = new ArrayList<>();
-            for(int i =0; i < lista.size(); i++){
-                if(lista.get(i).equals(elemento).toLowerCase()){
+            for (int i =0; i < lista.size(); i++){
+                if(lista.get(i).toLowerCase().equals(elemento.toLowerCase())){
                     posiciones.add(i);
                 }
             }
             if(!posiciones.isEmpty()){
-                System.out.println("El elemnto "+ elementonto + "se encuentra en las posciones: " + posiciones);
+                System.out.println("El elemento "+ elemento + " se encuentra en las posciones: " + posiciones);
             }else{
                 System.out.println("El elemnto "+ elemento + " no se encuntra en ninguna de las posiciones ");
             }
         }
-        public static void eliminarElemento (ArrayList<String> lista) {
+        public static void eliminarElemento (ArrayList<String> lista, Scanner sc) {
             System.out.println("Como desea eliminar el elemento por palabara(1) o por indice(2)");
             int opcionEliminar = sc.nextInt();
+
             if (opcionEliminar == 1) {
                 System.out.println("Introduzca la palabra que desea eliminar");
-                mostrarlista(listaElementos);
+                mostrarlista(lista);
                 int eliminar = sc.nextInt();
-                lista.remove(index = eliminar);
+                lista.remove(eliminar);
                 System.out.println("EL elemento ha sido eliminado");
             }else{
                     System.out.println("La palabra introducida no es valida");
-                }
+            }
                 //duda de poner switch para mas eficaz!!!!
                 if (opcionEliminar == 2){
                 System.out.println("Introduce el indice de la palabra que desea eliminar");
@@ -114,13 +123,13 @@ public class ArrayList {
             }
         }
 
-        public static void modificarElemento(ArrayList<String> lista) {
+        public static void modificarElemento(ArrayList<String> lista, Scanner sc) {
             System.out.println("¿Como desea modicar por la palabra(1) o por el indice(2) ");
             int opcionModificar = sc.nextInt();
 
             if (opcionModificar == 1) {
                 System.out.println("Introduzca la palabra que desea modificar");
-                String palabra = sc.nextLine().toLowerCase();
+                String palabra = sc.nextLine();
                 if (lista.contains(palabra)) {
                     System.out.println("Introduzca la nueva palabra que quiere añadir");
                     String palabraNueva = sc.nextLine();
@@ -133,8 +142,8 @@ public class ArrayList {
             } else if (opcionModificar == 2) {
                 System.out.println("Introduzca el indice del elemento que desea modificar");
                 int modificarIndice = sc.nextInt();
-                int indice = 0;
-                if (indice >= 0 && indice <= lista.size()){
+
+                if (modificarIndice >= 0 && modificarIndice <= lista.size()){
                     System.out.println("Introduce la nueva palabra que desea añadir");
                     String palabraNueva = sc.nextLine();
                     lista.set(modificarIndice, palabraNueva);
